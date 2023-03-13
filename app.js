@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
@@ -20,13 +21,13 @@ app.post("/form", (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'singhastitva99@gmail.com',
-            pass: 'cdiwjjbpkthudrtf',
+            user: process.env.USER,
+            pass: process.env.PASSWORD,
         },
     });
 
     const mailOptions = {
-        from: 'singhastitva99@gmail.com',
+        from: process.env.USER,
         to: email,
         subject: 'StackFusion Assignment',
         text: `YOUR NAME IS: ${name} YOUR EMAIL IS: ${email} YOUR DOB IS: ${age} YOUR NUMBER IS: ${number}`,
